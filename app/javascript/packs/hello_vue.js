@@ -6,13 +6,28 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import App from '../app.vue'
+
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
+
+const routes = [
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
+
+Vue.use(VueRouter)
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    render: h => h(App)
-  }).$mount()
-  document.body.appendChild(app.$el)
+    router
+  }).$mount('#app')
 
   console.log(app)
 })
